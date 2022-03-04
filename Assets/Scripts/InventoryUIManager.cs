@@ -62,23 +62,18 @@ public class InventoryUIManager : MonoBehaviour {
     }
 
     void RefreshUI(){
-        //Esta parte elimina cualquier celda que se estuviese viendo en ese momento...
         foreach(Transform child in inventoryPanelItem.transform){
             Destroy(child.gameObject);
         }
 
-
-        //Muestro la categoría que el usuario desea ver...
         foreach(InventoryItem item in selectedItems){
             GameObject newButton = Instantiate(inventoryItemElement) as GameObject;
             InventoryItemUI text = newButton.GetComponent<InventoryItemUI>();
             text.textItemElement.text = item.Name + "\n" + item.Description;
 
-
-            //Triggers de buttons
             text.addButton.GetComponent<Button>().onClick.AddListener(() =>
             {
-                //Puedo proceder a equiparle una arma
+           
                 if (item.Category == BaseItem.ItemCategory.Weapon
                     ||item.Category == BaseItem.ItemCategory.Armour
                     ||item.Category == BaseItem.ItemCategory.Clothing){
